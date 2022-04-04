@@ -1,5 +1,5 @@
 # Prisoner Escape
-A basic implementation of the popular mobile game  Prisoner Escape
+My first own game designed :)
 
 
 ## Getting Started
