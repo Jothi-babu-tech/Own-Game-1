@@ -1,32 +1,52 @@
 /// <reference path="webgl.d.ts" />
 
-let body = class {
+let jeans = class {
     constructor(gl, pos) {
         this.positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
-        this.speed = 0;
 
         this.positions = [
              // Front face
+             -0.2, 0.0, 0.0,
+             -0.05, 0.0, 0.0,
+             -0.05, 0.4, 0.0,
              -0.2, 0.4, 0.0,
-              0.2, 0.4, 0.0,
-              0.2, 0.9, 0.0,
-             -0.2, 0.9, 0.0,
              //Back Face
-            -0.2, 0.9, 0.0,
-             0.2, 0.9, 0.0,
-             0.2, 0.9, -0.2,
-            -0.2, 0.9, -0.2,
-            // Front face
-              0.2, 0.4, 0.0,
-              0.2, 0.4,-0.2,
-              0.2, 0.9,-0.2,
-              0.2, 0.9, 0.0,
-             //Back Face
-            -0.2, 0.4, 0.0,
+            -0.05, 0.0, 0.0,
+            -0.05, 0.0, -0.2,
+            -0.05, 0.4, -0.2,
+            -0.05, 0.4, 0.0,
+             //Top Face
+            -0.2, 0.0, 0.0,
+            -0.2, 0.0, -0.2,
             -0.2, 0.4, -0.2,
-            -0.2, 0.9, -0.2,
-            -0.2, 0.9,  0.0,
+            -0.2, 0.4, 0.0,
+            //Top Face
+            -0.2, 0.4, 0.0,
+            -0.05, 0.4, 0.0,
+            -0.05, 0.4, -0.2,
+            -0.2, 0.4, -0.2,
+
+             // Front face
+             0.2, 0.0, 0.0,
+             0.05, 0.0, 0.0,
+             0.05, 0.4, 0.0,
+             0.2, 0.4, 0.0,
+             //Back Face
+             0.05, 0.0, 0.0,
+             0.05, 0.0, -0.2,
+             0.05, 0.4, -0.2,
+             0.05, 0.4, 0.0,
+             //Top Face
+             0.2, 0.0, 0.0,
+             0.2, 0.0, -0.2,
+             0.2, 0.4, -0.2,
+             0.2, 0.4, 0.0,
+             //Top Face
+             0.2, 0.4, 0.0,
+             0.05, 0.4, 0.0,
+             0.05, 0.4, -0.2,
+             0.2, 0.4, -0.2,
         ];
 
         this.rotation = 0;
@@ -49,12 +69,32 @@ let body = class {
     1.0,  0.0,
     1.0,  1.0,
     0.0,  1.0,
+    // Top
+    0.0,  0.0,
+    1.0,  0.0,
+    1.0,  1.0,
+    0.0,  1.0,
     // Front
     0.0,  0.0,
     1.0,  0.0,
     1.0,  1.0,
     0.0,  1.0,
     // Back
+    0.0,  0.0,
+    1.0,  0.0,
+    1.0,  1.0,
+    0.0,  1.0,
+    // Top
+    0.0,  0.0,
+    1.0,  0.0,
+    1.0,  1.0,
+    0.0,  1.0,
+    // Back
+    0.0,  0.0,
+    1.0,  0.0,
+    1.0,  1.0,
+    0.0,  1.0,
+    // Top
     0.0,  0.0,
     1.0,  0.0,
     1.0,  1.0,
@@ -79,6 +119,10 @@ let body = class {
             4, 5, 6,    4, 6, 7,
             8, 9, 10,   8, 10, 11,
             12, 13, 14,  12, 14, 15,
+            16, 17, 18,  16, 18, 19,
+            20, 21, 22,  20, 22, 23,
+            24, 25, 26,  24, 26, 27,
+            28, 29, 30,  28, 30, 31,
         ];
 
         // Now send the element array to GL
@@ -94,7 +138,7 @@ let body = class {
 
     }
 
-    drawbody(gl, projectionMatrix, programInfo, deltaTime, texture) {
+    drawjeans(gl, projectionMatrix, programInfo, deltaTime, texture) {
         const modelViewMatrix = mat4.create();
         mat4.translate(
             modelViewMatrix,
@@ -167,7 +211,7 @@ let body = class {
             modelViewMatrix);
 
         {
-            const vertexCount = 24;
+            const vertexCount = 48;
             const type = gl.UNSIGNED_SHORT;
             const offset = 0;
             gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);

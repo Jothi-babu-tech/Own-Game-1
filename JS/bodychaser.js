@@ -1,10 +1,9 @@
 /// <reference path="webgl.d.ts" />
 
-let body = class {
+let bodychaser = class {
     constructor(gl, pos) {
         this.positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
-        this.speed = 0;
 
         this.positions = [
              // Front face
@@ -94,7 +93,7 @@ let body = class {
 
     }
 
-    drawbody(gl, projectionMatrix, programInfo, deltaTime, texture) {
+    drawbodychaser(gl, projectionMatrix, programInfo, deltaTime, texture) {
         const modelViewMatrix = mat4.create();
         mat4.translate(
             modelViewMatrix,

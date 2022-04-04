@@ -1,32 +1,31 @@
 /// <reference path="webgl.d.ts" />
 
-let body = class {
+let obstacle1 = class {
     constructor(gl, pos) {
         this.positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
-        this.speed = 0;
 
         this.positions = [
              // Front face
-             -0.2, 0.4, 0.0,
-              0.2, 0.4, 0.0,
-              0.2, 0.9, 0.0,
-             -0.2, 0.9, 0.0,
+             -0.5, 0.0, 0.0,
+              0.5, 0.0, 0.0,
+              0.5, 0.7, 0.0,
+             -0.5, 0.7, 0.0,
              //Back Face
-            -0.2, 0.9, 0.0,
-             0.2, 0.9, 0.0,
-             0.2, 0.9, -0.2,
-            -0.2, 0.9, -0.2,
+             -0.5, 0.0, 0.2,
+              0.5, 0.0, 0.2,
+              0.5, 0.7, 0.2,
+             -0.5, 0.7, 0.2,
             // Front face
-              0.2, 0.4, 0.0,
-              0.2, 0.4,-0.2,
-              0.2, 0.9,-0.2,
-              0.2, 0.9, 0.0,
+              0.5, 0.0, 0.0,
+              0.5, 0.0, 0.2,
+              0.5, 0.7, 0.2,
+              0.5, 0.7, 0.0,
              //Back Face
-            -0.2, 0.4, 0.0,
-            -0.2, 0.4, -0.2,
-            -0.2, 0.9, -0.2,
-            -0.2, 0.9,  0.0,
+              -0.5, 0.0, 0.0,
+              -0.5, 0.0, 0.2,
+              -0.5, 0.7, 0.2,
+              -0.5, 0.7, 0.0,
         ];
 
         this.rotation = 0;
@@ -94,7 +93,7 @@ let body = class {
 
     }
 
-    drawbody(gl, projectionMatrix, programInfo, deltaTime, texture) {
+    drawobstacle1(gl, projectionMatrix, programInfo, deltaTime, texture) {
         const modelViewMatrix = mat4.create();
         mat4.translate(
             modelViewMatrix,

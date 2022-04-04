@@ -1,32 +1,21 @@
 /// <reference path="webgl.d.ts" />
 
-let body = class {
+let fence = class {
     constructor(gl, pos) {
         this.positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
-        this.speed = 0;
 
         this.positions = [
              // Front face
-             -0.2, 0.4, 0.0,
-              0.2, 0.4, 0.0,
-              0.2, 0.9, 0.0,
-             -0.2, 0.9, 0.0,
-             //Back Face
-            -0.2, 0.9, 0.0,
-             0.2, 0.9, 0.0,
-             0.2, 0.9, -0.2,
-            -0.2, 0.9, -0.2,
-            // Front face
-              0.2, 0.4, 0.0,
-              0.2, 0.4,-0.2,
-              0.2, 0.9,-0.2,
-              0.2, 0.9, 0.0,
-             //Back Face
-            -0.2, 0.4, 0.0,
-            -0.2, 0.4, -0.2,
-            -0.2, 0.9, -0.2,
-            -0.2, 0.9,  0.0,
+             -3.0, 0.0, -1.0,
+             -3.0, 0.0,  1.0,
+             -3.0, 2.0,  1.0,
+             -3.0, 2.0, -1.0,
+             //Top Face
+              3.0, 0.0, -1.0,
+              3.0, 0.0,  1.0,
+              3.0, 2.0,  1.0,
+              3.0, 2.0, -1.0,
         ];
 
         this.rotation = 0;
@@ -49,16 +38,7 @@ let body = class {
     1.0,  0.0,
     1.0,  1.0,
     0.0,  1.0,
-    // Front
-    0.0,  0.0,
-    1.0,  0.0,
-    1.0,  1.0,
-    0.0,  1.0,
-    // Back
-    0.0,  0.0,
-    1.0,  0.0,
-    1.0,  1.0,
-    0.0,  1.0,
+    
   ];
 
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoordinates),
@@ -77,8 +57,6 @@ let body = class {
         const indices = [
             0, 1, 2,    0, 2, 3, // front
             4, 5, 6,    4, 6, 7,
-            8, 9, 10,   8, 10, 11,
-            12, 13, 14,  12, 14, 15,
         ];
 
         // Now send the element array to GL
@@ -94,7 +72,7 @@ let body = class {
 
     }
 
-    drawbody(gl, projectionMatrix, programInfo, deltaTime, texture) {
+    drawFence(gl, projectionMatrix, programInfo, deltaTime, texture) {
         const modelViewMatrix = mat4.create();
         mat4.translate(
             modelViewMatrix,
@@ -167,7 +145,7 @@ let body = class {
             modelViewMatrix);
 
         {
-            const vertexCount = 24;
+            const vertexCount = 12;
             const type = gl.UNSIGNED_SHORT;
             const offset = 0;
             gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);

@@ -1,32 +1,37 @@
 /// <reference path="webgl.d.ts" />
 
-let body = class {
+let trafficlightstand = class {
     constructor(gl, pos) {
         this.positionBuffer = gl.createBuffer();
         gl.bindBuffer(gl.ARRAY_BUFFER, this.positionBuffer);
-        this.speed = 0;
 
         this.positions = [
              // Front face
-             -0.2, 0.4, 0.0,
-              0.2, 0.4, 0.0,
-              0.2, 0.9, 0.0,
-             -0.2, 0.9, 0.0,
+             -0.2, 2.0, 0.0,
+              0.2, 2.0, 0.0,
+              0.2, 2.0, 0.4,
+             -0.2, 2.0, 0.4,
              //Back Face
-            -0.2, 0.9, 0.0,
-             0.2, 0.9, 0.0,
-             0.2, 0.9, -0.2,
-            -0.2, 0.9, -0.2,
-            // Front face
-              0.2, 0.4, 0.0,
-              0.2, 0.4,-0.2,
-              0.2, 0.9,-0.2,
-              0.2, 0.9, 0.0,
+             -0.1, 0.0, 0.0,
+              0.1, 0.0, 0.0,
+              0.1, 1.0, 0.0,
+             -0.1, 1.0, 0.0,
              //Back Face
-            -0.2, 0.4, 0.0,
-            -0.2, 0.4, -0.2,
-            -0.2, 0.9, -0.2,
-            -0.2, 0.9,  0.0,
+             -0.1, 0.0, 0.2,
+              0.1, 0.0, 0.2,
+              0.1, 1.0, 0.2,
+             -0.1, 1.0, 0.2,
+             //Back Face
+              0.1, 0.0, 0.0,
+              0.1, 0.0, 0.2,
+              0.1, 1.0, 0.2,
+              0.1, 1.0, 0.0,
+             //Back Face
+             -0.1, 0.0, 0.0,
+             -0.1, 0.0, 0.2,
+             -0.1, 1.0, 0.2,
+             -0.1, 1.0, 0.0,
+            
         ];
 
         this.rotation = 0;
@@ -59,6 +64,11 @@ let body = class {
     1.0,  0.0,
     1.0,  1.0,
     0.0,  1.0,
+    // Back
+    0.0,  0.0,
+    1.0,  0.0,
+    1.0,  1.0,
+    0.0,  1.0,
   ];
 
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(textureCoordinates),
@@ -79,6 +89,7 @@ let body = class {
             4, 5, 6,    4, 6, 7,
             8, 9, 10,   8, 10, 11,
             12, 13, 14,  12, 14, 15,
+            16, 17, 18,  16, 18, 19,
         ];
 
         // Now send the element array to GL
@@ -94,7 +105,7 @@ let body = class {
 
     }
 
-    drawbody(gl, projectionMatrix, programInfo, deltaTime, texture) {
+    drawtrafficlightstand(gl, projectionMatrix, programInfo, deltaTime, texture) {
         const modelViewMatrix = mat4.create();
         mat4.translate(
             modelViewMatrix,
@@ -167,7 +178,7 @@ let body = class {
             modelViewMatrix);
 
         {
-            const vertexCount = 24;
+            const vertexCount = 30;
             const type = gl.UNSIGNED_SHORT;
             const offset = 0;
             gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);
